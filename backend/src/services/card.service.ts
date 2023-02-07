@@ -21,8 +21,15 @@ export class CardService {
         return this.cardRepository.findOneBy({ id });
     }
 
-    async update(id: number, data: CardData): Promise<UpdateResult> {
-        return await this.cardRepository.update(id, data);
+    async update(id: number, data: CardData): Promise<Card | null> {
+        const card = await this.findOne(id);
+        if (!card) {
+            return null;
+        }
+
+        this.cardRepository.merge(card, data);
+        await this.cardRepository.save(card);
+        return card;
     }
 
     async delete(id: number): Promise<DeleteResult> {

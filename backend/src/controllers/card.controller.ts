@@ -1,41 +1,64 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { Card } from '../entities/card.entity';
 import { CardService } from '../services/card.service';
+import { HttpError } from '../types/http-error.type';
 
 const cardService = new CardService();
 
 export class CardController {
-    async create(req: Request, res: Response) {
+    async create(req: Request, res: Response, next: NextFunction) {
         const { rfid, label } = req.body;
-        const card = await cardService.create({ rfid, label });
-        res.status(201).send(card);
+
+        try {
+            const card = await cardService.create({ rfid, label });
+            res.status(201).send(card);
+        } catch (error) {
+            next(new HttpError());
+        }
     }
 
-    async getAll(req: Request, res: Response) {
-        const cards = await cardService.getAll();
-        res.send(cards);
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const cards = await cardService.getAll();
+            res.send(cards);
+        } catch (error) {
+            next(new HttpError());
+        }
     }
 
-    async update(req: Request, res: Response) {
+    async update(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
         const { rfid, label } = req.body;
-        const updateResult = (await cardService.update(parseInt(id), {
-            rfid,
-            label,
-        })) as any;
-        if (!updateResult || !updateResult.affected) {
-            res.status(404).send();
-            return;
+
+        try {
+            const card = await cardService.update(parseInt(id), {
+                rfid,
+                label,
+            });
+
+            if (!card) {
+                next(new HttpError('Card not found', 404));
+            }
+
+            res.send(card);
+        } catch (error) {
+            next(new HttpError());
         }
-        res.status(204).send();
     }
 
-    async delete(req: Request, res: Response) {
+    async delete(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
-        const deleteResult = (await cardService.delete(parseInt(id))) as any;
-        if (!deleteResult || !deleteResult.affected) {
-            res.status(404).send();
-            return;
+        try {
+            const deleteResult = (await cardService.delete(
+                parseInt(id)
+            )) as any;
+            if (!deleteResult || !deleteResult.affected) {
+                next(new HttpError('Card not found', 404));
+                return;
+            }
+            res.status(204).send();
+        } catch (error) {
+            next(new HttpError());
         }
-        res.status(204).send();
     }
 }

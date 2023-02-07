@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import { AppDataSource } from './config/database.config';
+import { ErrorMiddleWare } from './middlewares/error.middleware';
 import cardRouter from './routes/card.routes';
 
 const app = express();
@@ -18,6 +19,8 @@ app.use(express.json());
         app.get('/', (req, res) => {
             res.send('Hello World!');
         });
+
+        app.use(ErrorMiddleWare);
 
         app.listen(port, () => {
             console.log(`App listening at ${port}`);
