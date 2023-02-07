@@ -13,7 +13,7 @@ export class CardService {
         return card;
     }
 
-    async getAll(): Promise<Card[]> {
+    async findAll(): Promise<Card[]> {
         return this.cardRepository.find();
     }
 

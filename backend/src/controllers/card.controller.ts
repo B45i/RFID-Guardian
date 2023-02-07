@@ -19,7 +19,7 @@ export class CardController {
 
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const cards = await cardService.getAll();
+            const cards = await cardService.findAll();
             res.send(cards);
         } catch (error) {
             next(new HttpError());
