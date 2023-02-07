@@ -6,7 +6,10 @@ const cardRouter = Router();
 
 const cardController = new CardController();
 
-// get all cards
-cardRouter.get('/', cardController.getAllCards);
+cardRouter.get('/', cardController.getAll);
+// cardRouter.get("/:id", cardController.getCardById)
+cardRouter.post('/', cardController.create);
+cardRouter.put('/:id', cardController.update);
+cardRouter.delete('/:id', cardController.delete);
 
 export default cardRouter;
