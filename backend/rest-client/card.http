@@ -1,5 +1,5 @@
 @BASE_URL = http://localhost:3001/cards/
-@CARD_ID = 12
+@CARD_ID = 9
 
 GET {{BASE_URL}}
 
@@ -25,4 +25,4 @@ Content-Type: application/json
 
 ###
 
-DELETE {{BASE_URL}}/{{CARD_ID}}
+DELETE {{BASE_URL}}/40

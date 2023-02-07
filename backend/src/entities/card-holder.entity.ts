@@ -12,7 +12,9 @@ export class CardHolder {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => Card)
+    @OneToOne(() => Card, {
+        onDelete: 'SET NULL',
+    })
     @JoinColumn({ name: 'card_id' })
     card: Card;
 
@@ -22,13 +24,13 @@ export class CardHolder {
     @Column({ length: 255 })
     email: string;
 
-    @Column({ type: 'timestamptz' })
+    @Column({ type: 'timestamptz', nullable: true })
     last_login: Date;
 
-    @Column({ type: 'timestamptz' })
+    @Column({ type: 'timestamptz', nullable: true })
     last_logout: Date;
 
-    @Column({ length: 255 })
+    @Column({ length: 255, nullable: true })
     department: string;
 
     @Column({ type: 'boolean', default: false })

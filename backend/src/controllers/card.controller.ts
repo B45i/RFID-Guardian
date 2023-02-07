@@ -49,9 +49,8 @@ export class CardController {
     async delete(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
         try {
-            const deleteResult = (await cardService.delete(
-                parseInt(id)
-            )) as any;
+            const deleteResult = await cardService.delete(parseInt(id));
+
             if (!deleteResult || !deleteResult.affected) {
                 next(new HttpError('Card not found', 404));
                 return;
