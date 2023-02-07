@@ -15,7 +15,7 @@ export default class CardHolderController {
         }
     }
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async findAll(req: Request, res: Response, next: NextFunction) {
         try {
             const cardHolders = await cardHolderService.findAll();
             res.send(cardHolders);

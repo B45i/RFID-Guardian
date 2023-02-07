@@ -1,17 +1,18 @@
 import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../config/database.config';
 import { CardHolder } from '../entities/card-holder.entity';
+import { Card } from '../entities/card.entity';
 
 export default class CardHolderService {
     cardHolderRepository = AppDataSource.getRepository(CardHolder);
 
-    async create(cardHolderData: CardHolder) {
+    async create(cardHolderData: CardHolder): Promise<CardHolder> {
         const cardHolder = this.cardHolderRepository.create(cardHolderData);
         await this.cardHolderRepository.save(cardHolder);
         return cardHolder;
     }
 
-    async findAll() {
+    async findAll(): Promise<CardHolder[]> {
         return this.cardHolderRepository.find({
             relations: ['card'],
         });

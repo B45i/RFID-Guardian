@@ -5,6 +5,10 @@ GET {{BASE_URL}}
 
 ###
 
+GET {{BASE_URL}}/empty
+
+###
+
 POST {{BASE_URL}}
 Content-Type: application/json
 

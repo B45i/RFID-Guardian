@@ -21,6 +21,18 @@ export class CardService {
         return this.cardRepository.findOneBy({ id });
     }
 
+    async findEmpty(): Promise<any[]> {
+        return await this.cardRepository
+            .createQueryBuilder('card')
+            .leftJoinAndSelect(
+                'card_holder',
+                'card_holder',
+                'card.id = card_holder.card_id'
+            )
+            .where('card_holder.card_id is NULL')
+            .getMany();
+    }
+
     async update(id: number, data: CardData): Promise<Card | null> {
         const card = await this.findOne(id);
         if (!card) {

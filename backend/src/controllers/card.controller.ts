@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { Card } from '../entities/card.entity';
 import { CardService } from '../services/card.service';
 import { HttpError } from '../types/http-error.type';
 
@@ -17,11 +16,21 @@ export class CardController {
         }
     }
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async findAll(req: Request, res: Response, next: NextFunction) {
         try {
             const cards = await cardService.findAll();
             res.send(cards);
         } catch (error) {
+            next(new HttpError());
+        }
+    }
+
+    async findAllEmpty(req: Request, res: Response, next: NextFunction) {
+        try {
+            const cards = await cardService.findEmpty();
+            res.send(cards);
+        } catch (error) {
+            console.log(error);
             next(new HttpError());
         }
     }

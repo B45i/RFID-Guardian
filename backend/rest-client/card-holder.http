@@ -12,19 +12,19 @@ Content-Type: application/json
     "full_name": "Mr. {{$randomInt 1 200}}",
     "email": "{{$randomInt 1 200}}@mail.com",
     "department": "Engineering",
-    "card": 40
+    "card": 39
 }
 
 ###
 
-PUT {{BASE_URL}}/2
+PUT {{BASE_URL}}/6
 Content-Type: application/json
 
 {
     "full_name": "Mr. {{$randomInt 1 200}}",
     "email": "{{$randomInt 1 200}}@mail.com",
     "department": "Engineering",
-    "card": 8
+    "card": 6
 }
 
 ###
