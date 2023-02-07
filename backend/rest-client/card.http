@@ -1,0 +1,28 @@
+@BASE_URL = http://localhost:3001/cards/
+@CARD_ID = 12
+
+GET {{BASE_URL}}
+
+###
+
+POST {{BASE_URL}}
+Content-Type: application/json
+
+{
+  "rfid": "{{$guid}}",
+  "label": "Card {{$guid}}"
+}
+
+###
+
+PUT {{BASE_URL}}/{{CARD_ID}}
+Content-Type: application/json
+
+{
+  "rfid": "{{$guid}}",
+  "label": "Edited {{$guid}}"
+}
+
+###
+
+DELETE {{BASE_URL}}/{{CARD_ID}}
