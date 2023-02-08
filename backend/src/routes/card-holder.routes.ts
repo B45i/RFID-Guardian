@@ -5,8 +5,8 @@ const cardHoldersRouter = Router();
 const cardHolderController = new CardHolderController();
 
 cardHoldersRouter.get('/', cardHolderController.findAll);
-// router.get("/:id", );
 cardHoldersRouter.post('/', cardHolderController.create);
+cardHoldersRouter.post('/check-in', cardHolderController.checkIn);
 cardHoldersRouter.put('/:id', cardHolderController.update);
 cardHoldersRouter.delete('/:id', cardHolderController.delete);
 

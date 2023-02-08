@@ -1,4 +1,4 @@
-import { DeleteResult, UpdateResult } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../config/database.config';
 import { Card } from '../entities/card.entity';
 
@@ -21,15 +21,19 @@ export class CardService {
         return this.cardRepository.findOneBy({ id });
     }
 
+    async findCardByRFID(rfid: string): Promise<Card | null> {
+        return this.cardRepository.findOneBy({ rfid });
+    }
+
     async findEmpty(): Promise<any[]> {
         return await this.cardRepository
             .createQueryBuilder('card')
             .leftJoinAndSelect(
                 'card_holder',
                 'card_holder',
-                'card.id = card_holder.card_id'
+                'card.id = card_holder.cardId'
             )
-            .where('card_holder.card_id is NULL')
+            .where('card_holder.cardId is NULL')
             .getMany();
     }
 

@@ -15,27 +15,27 @@ export class CardHolder {
     @OneToOne(() => Card, {
         onDelete: 'SET NULL',
     })
-    @JoinColumn({ name: 'card_id' })
+    @JoinColumn({ name: 'cardId' })
     card: Card;
 
     @Column({ length: 255 })
-    full_name: string;
+    fullName: string;
 
     @Column({ length: 255 })
     email: string;
 
     @Column({ type: 'timestamptz', nullable: true })
-    last_login: Date;
+    lastLogin: Date;
 
     @Column({ type: 'timestamptz', nullable: true })
-    last_logout: Date;
+    lastLogout: Date;
 
     @Column({ length: 255, nullable: true })
     department: string;
 
     @Column({ type: 'boolean', default: false })
-    is_logged_in: boolean;
+    isLoggedIn: boolean;
 
     @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
+    createdAt: Date;
 }

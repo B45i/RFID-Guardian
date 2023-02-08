@@ -15,6 +15,16 @@ export default class CardHolderController {
         }
     }
 
+    async checkIn(req: Request, res: Response, next: NextFunction) {
+        const { rfid } = req.body;
+        try {
+            const result = await cardHolderService.checkIn(rfid);
+            res.send(result);
+        } catch (error) {
+            next(new HttpError());
+        }
+    }
+
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
             const cardHolders = await cardHolderService.findAll();

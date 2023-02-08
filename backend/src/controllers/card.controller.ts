@@ -30,7 +30,6 @@ export class CardController {
             const cards = await cardService.findEmpty();
             res.send(cards);
         } catch (error) {
-            console.log(error);
             next(new HttpError());
         }
     }

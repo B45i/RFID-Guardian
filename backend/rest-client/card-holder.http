@@ -9,7 +9,7 @@ POST {{BASE_URL}}
 Content-Type: application/json
 
 {
-    "full_name": "Mr. {{$randomInt 1 200}}",
+    "fullName": "Mr. {{$randomInt 1 200}}",
     "email": "{{$randomInt 1 200}}@mail.com",
     "department": "Engineering",
     "card": 39
@@ -21,7 +21,7 @@ PUT {{BASE_URL}}/6
 Content-Type: application/json
 
 {
-    "full_name": "Mr. {{$randomInt 1 200}}",
+    "fullName": "Mr. {{$randomInt 1 200}}",
     "email": "{{$randomInt 1 200}}@mail.com",
     "department": "Engineering",
     "card": 6
@@ -32,3 +32,11 @@ Content-Type: application/json
 DELETE {{BASE_URL}}/17
 Content-Type: application/json
 
+###
+
+POST {{BASE_URL}}check-in
+Content-Type: application/json
+
+{
+    "rfid": "12345"
+}
