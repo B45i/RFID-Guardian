@@ -1,0 +1,21 @@
+:root {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --color-bg-main: #23262a;
+    --color-bg-sidebar: #1c1d21;
+    --color-border: #2f3136;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--color-bg-main);
+    color: #fff;
+}
